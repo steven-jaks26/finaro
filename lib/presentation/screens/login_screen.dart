@@ -77,7 +77,7 @@ class _LoginState extends ConsumerState<LoginScreen> {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [Icon(Icons.lock_outline, size: 16, color: scheme.onSurfaceVariant), const SizedBox(width: 6), Text('اطلاعات مالی روی دستگاه رمزگذاری می‌شود', style: TextStyle(fontSize: 12, color: scheme.onSurfaceVariant))]),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [Icon(Icons.lock_outline, size: 16, color: scheme.onSurfaceVariant), const SizedBox(width: 6), Flexible(child: Text('اطلاعات مالی روی دستگاه رمزگذاری می‌شود', textAlign: TextAlign.center, style: TextStyle(fontSize: 12, color: scheme.onSurfaceVariant)))]),
                   ],
                 ),
               ),
