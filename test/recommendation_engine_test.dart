@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:finaro_flutter/domain/models/models.dart';
-import 'package:finaro_flutter/domain/recommendation_engine.dart';
+import 'package:finaro/domain/models/models.dart';
+import 'package:finaro/domain/recommendation_engine.dart';
 
 void main() {
   test('returns only objectively improving recurring expense recommendations', () {

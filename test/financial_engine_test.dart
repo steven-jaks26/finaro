@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:finaro_flutter/domain/financial_engine.dart';
-import 'package:finaro_flutter/domain/models/models.dart';
+import 'package:finaro/domain/financial_engine.dart';
+import 'package:finaro/domain/models/models.dart';
 
 void main() {
   final today = DateTime(2026, 3, 15);
