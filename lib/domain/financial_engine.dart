@@ -14,7 +14,7 @@ class FinancialEngine {
     int forecastDays = 180,
   }) {
     final now = _dateOnly(today ?? DateTime.now());
-    final openingDate = _parseDate(profile.openingBalanceDate) ?? _earliestActivity(incomes, expenses, liabilities) ?? now;
+    final openingDate = _parseDate(profile.openingBalanceDate ?? '') ?? _earliestActivity(incomes, expenses, liabilities) ?? now;
     final current = _balanceOnDate(
       openingBalance: profile.openingBalanceRials,
       openingDate: openingDate,

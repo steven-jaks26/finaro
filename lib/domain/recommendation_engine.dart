@@ -125,7 +125,7 @@ class RecommendationEngine {
     }).toList();
   }
 
-  static bool _isRecurring(String frequency) => const {'روزانه', 'هفتگی', 'ماهانه', 'سالانه', 'روزانه', 'weekly', 'monthly', 'yearly', 'daily'}.contains(frequency.trim());
+  static bool _isRecurring(String frequency) => const {'روزانه', 'هفتگی', 'ماهانه', 'سالانه', 'weekly', 'monthly', 'yearly', 'daily'}.contains(frequency.trim());
 
   static int _reduced(int amount, int percent) => (amount * (100 - percent) / 100).round().clamp(1, amount) as int;
   static int _increase(int amount, int percent) => (amount * percent / 100).round().clamp(1, amount) as int;

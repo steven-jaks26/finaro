@@ -42,7 +42,7 @@ class _ScenarioState extends ConsumerState<ScenarioScreen> {
           DropdownMenuItem(value: ScenarioActionType.deferLiability, child: Text('تعویق یک تعهد')),
         ], onChanged: (v) => setState(() { type = v!; targetId = null; })),
         const SizedBox(height: 12),
-        if (_needsTarget) DropdownButtonFormField<String>(value: targetId, decoration: InputDecoration(labelText: _targetLabel), items: _targetRecords(incomes, expenses, liabilities).map((x) => DropdownMenuItem(value: x.id, child: Text(x.title))).toList(), onChanged: (v) => setState(() => targetId = v)),
+        if (_needsTarget) DropdownButtonFormField<String>(value: targetId, decoration: InputDecoration(labelText: _targetLabel), items: _targetRecords(incomes, expenses, liabilities).map<DropdownMenuItem<String>>((x) => DropdownMenuItem<String>(value: x.id, child: Text(x.title))).toList(), onChanged: (v) => setState(() => targetId = v)),
         if (_needsTarget) const SizedBox(height: 12),
         if (_needsPercent) ...[
           Text('درصد تغییر: $percent٪', style: const TextStyle(fontWeight: FontWeight.w800)),

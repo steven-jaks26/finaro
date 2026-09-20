@@ -5,6 +5,8 @@ import '../../core/formatters/money.dart';
 import '../../domain/models/models.dart';
 import '../../data/ai/ai_gateway.dart';
 import '../widgets/app_shell.dart';
+import '../../data/billing/entitlement_service.dart';
+import '../../data/billing/entitlement_service.dart';
 
 class SmartInputScreen extends ConsumerStatefulWidget { const SmartInputScreen({super.key}); @override ConsumerState<SmartInputScreen> createState()=>_SmartState(); }
 class _SmartState extends ConsumerState<SmartInputScreen>{
