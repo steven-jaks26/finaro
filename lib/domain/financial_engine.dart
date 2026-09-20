@@ -44,7 +44,7 @@ class FinancialEngine {
   }) {
     if (target.isBefore(openingDate)) return openingBalance;
     var balance = openingBalance;
-    for (var date = openingDate.add(const Duration(days: 1)); !date.isAfter(target); date = date.add(const Duration(days: 1))) {
+    for (var date = openingDate; !date.isAfter(target); date = date.add(const Duration(days: 1))) {
       balance += _netForDate(date, incomes, expenses, liabilities);
     }
     return balance;
