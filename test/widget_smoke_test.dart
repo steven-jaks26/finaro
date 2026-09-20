@@ -1,0 +1,1 @@
+import 'package:flutter_test/flutter_test.dart';import 'package:flutter_riverpod/flutter_riverpod.dart';import 'package:finaro/app/app.dart';void main(){testWidgets('boot', (t)async{await t.pumpWidget(const ProviderScope(child:FinaroApp()));await t.pump();expect(find.text('فینارو'),findsOneWidget);});}

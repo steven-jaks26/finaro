@@ -1,0 +1,6 @@
+class FinancialProfile{const FinancialProfile({this.id='local-profile',this.name='',this.openingBalanceRials=0,this.openingBalanceDate});final String id,name;final int openingBalanceRials;final String? openingBalanceDate;}
+class Income{const Income({required this.id,required this.title,required this.amountRials,required this.frequency,required this.start,this.payDay});final String id,title,frequency,start;final int amountRials;final int? payDay;}
+class Expense{const Expense({required this.id,required this.title,required this.amountRials,required this.frequency,required this.category,required this.date,this.startDate='',this.paymentDay});final String id,title,frequency,category,date,startDate;final int amountRials;final int? paymentDay;}
+class Liability{const Liability({required this.id,required this.title,required this.type,required this.totalRials,required this.paymentDate,this.installmentRials=0,this.remainingInstallments=0,this.frequency='یک‌بار',this.paymentDay});final String id,title,type,paymentDate,frequency;final int totalRials,installmentRials,remainingInstallments;final int? paymentDay;}
+class Category{const Category({required this.id,required this.title});final String id,title;}
+class ForecastPoint{const ForecastPoint({required this.date,required this.balanceRials});final String date;final int balanceRials;}

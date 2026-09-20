@@ -1,0 +1,1 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';class SessionRepository{const SessionRepository(this.s);final FlutterSecureStorage s;Future<bool> signedIn()async=>(await s.read(key:'finaro.session.phone'))!=null;Future<void> signIn(String p)=>s.write(key:'finaro.session.phone',value:p);Future<void> signOut()=>s.delete(key:'finaro.session.phone');}

@@ -1,0 +1,1 @@
+import 'package:flutter_test/flutter_test.dart';import 'package:finaro/core/formatters/money.dart';void main(){test('rial/toman semantics',(){expect(MoneyFormatter.toman(12500000),'1,250,000 تومان');expect(MoneyFormatter.tomanToRials('۱٬۲۵۰٬۰۰۰'),12500000);});}

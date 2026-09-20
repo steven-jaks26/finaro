@@ -1,0 +1,21 @@
+import 'package:go_router/go_router.dart';
+import '../screens/login_screen.dart';
+import '../screens/home_screen.dart';
+import '../screens/financial_screen.dart';
+import '../screens/forecast_screen.dart';
+import '../screens/settings_screen.dart';
+import '../screens/smart_input_screen.dart';
+import '../screens/backup_screen.dart';
+import '../screens/subscription_screen.dart';
+import '../screens/scenario_screen.dart';
+final router=GoRouter(initialLocation:'/login',routes:[
+  GoRoute(path:'/login',builder:(_,__)=>const LoginScreen()),
+  GoRoute(path:'/home',builder:(_,__)=>const HomeScreen()),
+  GoRoute(path:'/financial',builder:(_,__)=>const FinancialScreen()),
+  GoRoute(path:'/forecast',builder:(_,__)=>const ForecastScreen()),
+  GoRoute(path:'/settings',builder:(_,__)=>const SettingsScreen()),
+  GoRoute(path:'/smart-input',builder:(_,__)=>const SmartInputScreen()),
+  GoRoute(path:'/backup',builder:(_,__)=>const BackupScreen()),
+  GoRoute(path:'/subscription',builder:(_,__)=>const SubscriptionScreen()),
+  GoRoute(path:'/scenario',builder:(_,__)=>const ScenarioScreen()),
+]);
