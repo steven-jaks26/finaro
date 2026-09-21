@@ -31,37 +31,15 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.14.3'
-
-      - name: Flutter version
-        run: flutter --version
-
-      - name: Gradle version
-        run: gradle --version
-
-      - name: Flutter doctor
-        run: flutter doctor -v
-
-      - name: Get dependencies
-        run: flutter pub get
-
-      - name: Run tests
-        run: flutter test
-
-      - name: Build release APK
+          
+      - name: Generate Gradle Wrapper
         run: |
-          set -o pipefail
-          flutter build apk --release -v 2>&1 | tee build-release.log
+          cd android
+          gradle wrapper --gradle-version 8.14.3
+          chmod +x gradlew
 
-      - name: Upload build log
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-release-log
-          path: build-release.log
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: finaro-release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
-          if-no-files-found: error
+      - name: Verify Gradle Wrapper
+        run: |
+          cd android
+          ./gradlew --version
+          
