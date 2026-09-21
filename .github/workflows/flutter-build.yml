@@ -1,4 +1,3 @@
-```yaml
 name: Finaro Android Build
 
 on:
@@ -66,5 +65,3 @@ jobs:
           name: finaro-release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
           if-no-files-found: error
-```
-
