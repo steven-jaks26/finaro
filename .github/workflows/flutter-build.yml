@@ -1,3 +1,4 @@
+```yaml
 name: Finaro Android Build
 
 on:
@@ -27,8 +28,16 @@ jobs:
           channel: stable
           cache: true
 
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.14.0'
+
       - name: Flutter version
         run: flutter --version
+
+      - name: Gradle version
+        run: gradle --version
 
       - name: Flutter doctor
         run: flutter doctor -v
@@ -51,12 +60,11 @@ jobs:
           name: build-release-log
           path: build-release.log
 
-      #- name: Build release APK
-      #  run: flutter build apk --release
-
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: finaro-release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
           if-no-files-found: error
+```
+
