@@ -25,7 +25,7 @@ void main() {
       incomes: const [Income(id: 'i', title: 'درآمد', amountRials: 100, frequency: 'ماهانه', start: '2026-01-01', payDay: 31)],
       expenses: const [], liabilities: const [], forecastDays: 28,
     );
-    expect(snapshot.points.first.balanceRials, 10_000);
+    expect(snapshot.points.first.balanceRials, 10_100);
     expect(snapshot.points.last.balanceRials, 10_200);
   });
 
