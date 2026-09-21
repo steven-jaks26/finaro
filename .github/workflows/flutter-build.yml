@@ -40,7 +40,19 @@ jobs:
         run: flutter test
 
       - name: Build release APK
-        run: flutter build apk --release
+        run: |
+          set -o pipefail
+          flutter build apk --release -v 2>&1 | tee build-release.log
+
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-release-log
+          path: build-release.log
+
+      #- name: Build release APK
+      #  run: flutter build apk --release
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
