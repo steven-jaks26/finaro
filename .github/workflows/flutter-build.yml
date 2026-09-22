@@ -14,11 +14,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Java 17
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
+          cache: gradle
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
@@ -27,41 +28,8 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Create Android local.properties
-        run: |
-          echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.14.3'
-          
-      - name: Generate Gradle Wrapper
-        run: |
-          cd android
-          gradle wrapper --gradle-version 8.14.3
-          chmod +x gradlew
-
-      - name: Verify Gradle Wrapper
-        run: |
-          cd android
-          ./gradlew --version
-          
-      - name: Upload Gradle Wrapper
-        uses: actions/upload-artifact@v4
-        with:
-          name: gradle-wrapper
-          path: |
-            android/gradlew
-            android/gradlew.bat
-            android/gradle/wrapper/gradle-wrapper.jar
-            android/gradle/wrapper/gradle-wrapper.properties
-    
       - name: Flutter version
         run: flutter --version
-
-      - name: Gradle version
-        run: gradle --version
 
       - name: Flutter doctor
         run: flutter doctor -v
