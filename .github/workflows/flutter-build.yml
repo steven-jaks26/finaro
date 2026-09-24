@@ -45,16 +45,47 @@ jobs:
           set -o pipefail
           flutter build apk --release -v 2>&1 | tee build-release.log
 
+      # مهم:
+      # حتی اگر Flutter در مرحله نهایی نتواند APK را پیدا کند،
+      # این مرحله محل واقعی artifactهای تولیدشده را نشان می‌دهد.
+      - name: Inspect build outputs
+        if: always()
+        run: |
+          echo "========================================"
+          echo "APK FILES"
+          echo "========================================"
+          find "$GITHUB_WORKSPACE" -type f -name "*.apk" -print || true
+
+          echo "========================================"
+          echo "AAB FILES"
+          echo "========================================"
+          find "$GITHUB_WORKSPACE" -type f -name "*.aab" -print || true
+
+          echo "========================================"
+          echo "Flutter build directory"
+          echo "========================================"
+          find "$GITHUB_WORKSPACE/build" -type f 2>/dev/null | sort || true
+
+          echo "========================================"
+          echo "Android app build directory"
+          echo "========================================"
+          find "$GITHUB_WORKSPACE/android/app/build" -type f 2>/dev/null | sort || true
+
       - name: Upload build log
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: build-release-log
           path: build-release.log
+          if-no-files-found: warn
 
+      # به جای فرض کردن مسیر build/app/outputs/flutter-apk/app-release.apk
+      # تمام APKهای موجود در workspace پیدا و Upload می‌شوند.
       - name: Upload APK
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: finaro-release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: |
+            ${{ github.workspace }}/**/*.apk
           if-no-files-found: error
