@@ -7,4 +7,6 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { url "https://storage.googleapis.com/download.flutter.io" }
     }
-}rootProject.name='finaro';include ':app'
+}
+
+rootProject.name='finaro';include ':app'
