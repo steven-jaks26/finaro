@@ -40,52 +40,43 @@ jobs:
       - name: Run tests
         run: flutter test
 
-      - name: Build release APK
+      - name: Build release APK with Gradle
+        working-directory: android
         run: |
           set -o pipefail
-          flutter build apk --release -v 2>&1 | tee build-release.log
+          ./gradlew app:assembleRelease --stacktrace --info 2>&1 | tee ../gradle-release.log
 
-      # مهم:
-      # حتی اگر Flutter در مرحله نهایی نتواند APK را پیدا کند،
-      # این مرحله محل واقعی artifactهای تولیدشده را نشان می‌دهد.
-      - name: Inspect build outputs
-        if: always()
+      - name: Verify APK
         run: |
           echo "========================================"
           echo "APK FILES"
           echo "========================================"
-          find "$GITHUB_WORKSPACE" -type f -name "*.apk" -print || true
+
+          find "$GITHUB_WORKSPACE" -type f -name "*.apk" -print
 
           echo "========================================"
-          echo "AAB FILES"
+          echo "Expected Flutter APK"
           echo "========================================"
-          find "$GITHUB_WORKSPACE" -type f -name "*.aab" -print || true
 
-          echo "========================================"
-          echo "Flutter build directory"
-          echo "========================================"
-          find "$GITHUB_WORKSPACE/build" -type f 2>/dev/null | sort || true
+          if [ -f "$GITHUB_WORKSPACE/android/app/build/outputs/flutter-apk/app-release.apk" ]; then
+            echo "APK FOUND:"
+            ls -lh "$GITHUB_WORKSPACE/android/app/build/outputs/flutter-apk/app-release.apk"
+          else
+            echo "ERROR: Flutter APK was not found."
+            exit 1
+          fi
 
-          echo "========================================"
-          echo "Android app build directory"
-          echo "========================================"
-          find "$GITHUB_WORKSPACE/android/app/build" -type f 2>/dev/null | sort || true
-
-      - name: Upload build log
+      - name: Upload Gradle build log
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: build-release-log
-          path: build-release.log
+          name: gradle-release-log
+          path: gradle-release.log
           if-no-files-found: warn
 
-      # به جای فرض کردن مسیر build/app/outputs/flutter-apk/app-release.apk
-      # تمام APKهای موجود در workspace پیدا و Upload می‌شوند.
       - name: Upload APK
-        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: finaro-release-apk
-          path: |
-            ${{ github.workspace }}/**/*.apk
+          path: android/app/build/outputs/flutter-apk/app-release.apk
           if-no-files-found: error
